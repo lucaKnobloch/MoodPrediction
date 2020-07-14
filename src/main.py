@@ -34,16 +34,19 @@ def series_to_supervised(data, dropnan=True):
 
 
 # Hyperparamter
-batch_size = 3
-amount_of_epochs = 125
-lstm_units = 60
-cross_validation = True
+batch_size = 1
+amount_of_epochs = 50
+lstm_units = 8
+# 1000 epochs [-0.26869208 -0.40000001 -0.07393112 -0.05755799 -0.23714375 -0.33280233]
+# 100 epochs [-0.29874116 -0.29221344 -0.04607497 -0.17346033 -0.24597952]
+cross_validation = False
 plot = True
 one_hot_encoding = False
 # specify the number of lag hours
 n_hours = 118
 n_features = 16
 n_train = 90
+k_folds = 5 
 
 # load dataset
 dataset = read_csv('resources_hours/u59.csv', delimiter=';', header=0, index_col=0)
@@ -98,7 +101,7 @@ estimator = KerasRegressor(build_fn=buildmodel, epochs=amount_of_epochs, batch_s
 if cross_validation:
     # evaluation
     # initialize the cross validation folds api
-    kfold = KFold(6)
+    kfold = KFold(k_folds)
     results = cross_val_score(estimator, test_X, test_y, cv=kfold)
     print(results)
 
