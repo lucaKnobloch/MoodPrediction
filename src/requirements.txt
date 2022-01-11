@@ -3,3 +3,5 @@ sklearn
 keras
 matplotlib
 tensorflow
+numpy>=1.22.0 # not directly required, pinned by Snyk to avoid a vulnerability
+scikit-learn>=0.24.2 # not directly required, pinned by Snyk to avoid a vulnerability
